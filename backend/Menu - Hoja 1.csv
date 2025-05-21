@@ -1,0 +1,22 @@
+id,nombre,categoria,descripcion,precio,imagen
+1,Pan de Mostaza,Entradas,Pan horneado con mantequilla de ajo.,6,https://i.imgur.com/GtGgVgg
+2,Mozzarella Sticks,Entradas,Palitos de queso empanizados y fritos.,6,https://i.imgur.com/GBIyYgR
+3,Ensalada César,Entradas,"Lechuga, crutones, parmesano y aderezo César.",4,https://imgur.com/JuqvaJJ
+4,Margherita,Pizzas,"Clásica pizza con salsa de tomate, mozarella y albahaca fresca.",32,https://imgur.com/qx6Qjgf
+5,Pepperoni,Pizzas,"Salsa de tomate, mozzarella y pepperoni crujiente.",37,https://imgur.com/0HaJS6T
+6,Vegetales,Pizzas,Variedad de vegetales frescos con una mezcla de quesos derretidos.,30,https://imgur.com/xn88Tiz
+7,Cuatro Quesos,Pizzas,"Mezcla de mozzarella, gorgonzola, parmesano y cheddar.",35,https://imgur.com/RrhTRde
+8,Hawaiana,Pizzas,"Jamón, piña y queso mozarrella sobre una base de salsa de tomate.",33,https://imgur.com/J5vDgkK
+9,Barbecue,Pizzas,"Pollo desmenuzado, salsa BBQ, cebolla y queso cheddar.",36,https://imgur.com/wwi18mm
+10,Napolitana,Pizzas,"Salsa de tomate, anchoas, aceitunas y orégano.",34,https://imgur.com/vDDXNah
+11,Diávola,Pizzas,"Pepperoni picante, salsa de tomate y queso mozarella.",38,https://imgur.com/UJ8q0nj
+12,Marinara,Pizzas,"Salsa de tomate, ajo, orégano y aceite de oliva.",31,https://imgur.com/8kQJPIw
+13,Coca-Cola,Bebidas,Gaseosa clásica con burbujas.,2,https://imgur.com/HqxvK0U
+14,Sprite,Bebidas,Refrescante gaseosa de limón.,2,https://imgur.com/AowZddI
+15,Red Bull,Bebidas,Bebida energética revitalizante.,4,https://imgur.com/D7jSE8Q
+16,Té Helado,Bebidas,Té frío con limón y azúcar.,3,https://imgur.com/Q6vl5tJ
+17,Limonada Natural,Bebidas,Jugo de limón con azúcar y hielo.,3,https://imgur.com/dmLO3kg
+18,Jugo Natural,Bebidas,Bebida refrescante de frutas.,4,https://imgur.com/8KVFfJK
+19,Brownie de Chocolate,Postres,Postre suave y chocolatoso.,5,https://imgur.com/po01R4l
+20,Churros,Postres,Crujientes con azúcar y canela.,4,https://imgur.com/3Oj6K9C
+21,Helado,Postres,Cremoso y refrescante.,2.5,https://imgur.com/kE2hd5y

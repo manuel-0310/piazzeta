@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+</head>
+<body>
+  <h2>Iniciar Sesión</h2>
+  <form method="post" id="login-form">
+    {% csrf_token %}
+    <label for="id_username">Usuario:</label>
+    <input type="text"  name="username" id="id_username" required>
+
+    <label for="id_password">Contraseña:</label>
+    <input type="password" name="password" id="id_password" required>
+
+    <button type="submit">Entrar</button>
+  </form>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      const user = document.getElementById('id_username').value.trim();
+      const pwd  = document.getElementById('id_password').value;
+      if (!user || !pwd) {
+        e.preventDefault();
+        alert('Por favor completa usuario y contraseña.');
+      }
+    });
+  </script>
+</body>
+</html>

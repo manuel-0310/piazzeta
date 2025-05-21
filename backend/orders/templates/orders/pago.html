@@ -2,37 +2,39 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio | Piazzeta</title>
-    <!-- Enlaces correctos a CSS -->
-    <link rel="stylesheet" href="{% static 'orders/css/stylegeneral.css' %}">
-    <link rel="stylesheet" href="{% static 'orders/css/pagostyle.css' %}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proceso de Pago | Piazzeta</title>
+  <link rel="stylesheet" href="{% static 'orders/css/stylegeneral.css' %}">
+  <link rel="stylesheet" href="{% static 'orders/css/pagostyle.css' %}">
 </head>
 <body>
-    <header>
-        <h1>Proceso de Pago</h1>
-    </header>
-    <main>
-        <section class="formulario-pago">
-            <h2>Datos de Envío</h2>
-            <form id="pedido-form">
-                <input type="text" id="nombre" placeholder="Nombre" required>
-                <input type="text" id="telefono" placeholder="Teléfono" required>
-                <input type="text" id="direccion" placeholder="Dirección" required>
-                <button type="submit">Enviar Pedido</button>
-            </form>
-                    
-            <button type="button" onclick="cancelarPedido()">Cancelar Pedido</button>
-        </section>
-        <section class="resumen-carrito">
-            <h2>Resumen del Pedido</h2>
-            <ul id="lista-carrito"></ul>
-            <p><strong>Subtotal:</strong> <span id="precio"></span></p>
-            <p><strong>IVA (3.5%):</strong> <span id="impuesto"></span></p>
-            <p><strong>Total:</strong> <span id="total"></span></p>
-        </section>
-    </main>
-    <script src="{% static 'orders/js/scriptpago.js' %}"></script>
+  <header>
+    <h1>Proceso de Pago</h1>
+  </header>
+
+  <main>
+    <section class="formulario-pago">
+      <h2>Datos de Envío</h2>
+      <form id="pedido-form">
+        {% csrf_token %}  {# ← aquí #}
+        <input type="text" id="nombre"    name="nombre"    placeholder="Nombre"    required>
+        <input type="text" id="telefono"  name="telefono"  placeholder="Teléfono"  required>
+        <input type="text" id="direccion" name="direccion" placeholder="Dirección" required>
+        <button type="submit">Enviar Pedido</button>
+      </form>
+      <button type="button" onclick="cancelarPedido()">Cancelar Pedido</button>
+    </section>
+
+    <section class="resumen-carrito">
+      <h2>Resumen del Pedido</h2>
+      <ul id="lista-carrito"></ul>
+      <p><strong>Subtotal:</strong> <span id="precio">$0.00</span></p>
+      <p><strong>IVA (3.5%):</strong> <span id="impuesto">$0.00</span></p>
+      <p><strong>Total:</strong> <span id="total">$0.00</span></p>
+    </section>
+  </main>
+
+  <script src="{% static 'orders/js/scriptpago.js' %}"></script>
 </body>
 </html>

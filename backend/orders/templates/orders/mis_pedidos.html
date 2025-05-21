@@ -1,0 +1,22 @@
+{% extends 'orders/base.html' %}
+{% block title %}Mis Pedidos | Piazzeta{% endblock %}
+{% block content %}
+<h2>Mis Pedidos</h2>
+<ul>
+  {% for pedido in pedidos %}
+    <li>
+      <strong>Pedido #{{ pedido.id }}</strong> ({{ pedido.created_at|date:'SHORT_DATETIME_FORMAT' }})<br>
+      <em>Estado:</em> {{ pedido.get_status_display }}<br>
+      <em>Productos:</em>
+      <ul>
+        {% for item in pedido.items.all %}
+          <li>{{ item.dish.name }} x{{ item.quantity }} - ${{ item.unit_price }}</li>
+        {% endfor %}
+      </ul>
+      <hr>
+    </li>
+  {% empty %}
+    <li>No tienes pedidos aún.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registrar Usuario</title>
+</head>
+<body>
+  <h2>Registro</h2>
+  <form method="post" id="register-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Registrar</button>
+  </form>
+
+  <script>
+    document.getElementById('register-form').addEventListener('submit', function(e) {
+      const pwd1 = document.getElementById('id_password1').value;
+      const pwd2 = document.getElementById('id_password2').value;
+      if (pwd1 !== pwd2) {
+        e.preventDefault();
+        alert('Las contraseñas no coinciden.');
+      }
+    });
+  </script>
+</body>
+</html>

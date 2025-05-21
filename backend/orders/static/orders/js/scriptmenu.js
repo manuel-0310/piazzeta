@@ -1,125 +1,164 @@
-// scriptmenu.js COMPLETO
-
-const API_URL = "https://api.sheetbest.com/sheets/88a8b6fd-221c-49ba-a9de-34b0c3300146";
-
-let carrito = [];
+// scriptmenu.js
 
 document.addEventListener("DOMContentLoaded", () => {
+    // Mapeo de categorías a los contenedores de tu HTML
     const categorias = {
         "Entradas": document.getElementById("menu-entradas"),
-        "Pizzas": document.getElementById("menu-Pizzas"),
-        "Bebidas": document.getElementById("menu-Bebidas"),
-        "Postres": document.getElementById("menu-Postres")
+        "Pizzas":   document.getElementById("menu-Pizzas"),
+        "Bebidas":  document.getElementById("menu-Bebidas"),
+        "Postres":  document.getElementById("menu-Postres")
     };
 
-    const listaCarrito = document.querySelector(".lista-carrito");
-    const precioElemento = document.querySelector(".precio");
+    // Elementos del carrito
+    const listaCarrito     = document.querySelector(".lista-carrito");
+    const precioElemento   = document.querySelector(".precio");
     const impuestoElemento = document.querySelector(".impuesto");
-    const totalElemento = document.querySelector(".total");
-    const taxSection = document.querySelector(".tax-section");
+    const totalElemento    = document.querySelector(".total");
+    const taxSection       = document.querySelector(".tax-section");
 
-    fetch(API_URL)
-        .then(res => res.json())
-        .then(data => {
-            data.forEach(producto => {
+    // Recuperar carrito guardado (o inicializar vacío)
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    // 1. Cargar platos desde la API Django
+    fetch("/api/dishes/")
+        .then(res => {
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return res.json();
+        })
+        .then(dishes => {
+            dishes.forEach(dish => {
+                // ── transforma la URL de imagen como en tu JS antiguo ──
+                let imgSrc = "";
+                if (dish.image_url) {
+                    imgSrc = dish.image_url.trim();
+                    if (imgSrc.includes("imgur.com")) {
+                        imgSrc = imgSrc
+                            .replace("https://imgur.com/", "https://i.imgur.com/")
+                            .replace("http://imgur.com/",  "https://i.imgur.com/");
+                        if (!imgSrc.match(/\.(png|jpe?g|gif)$/i)) {
+                            imgSrc += ".png";
+                        }
+                    }
+                }
+
+                // Construir la tarjeta del plato
                 const card = document.createElement("section");
                 card.className = "menu-item";
-
-                const imagenUrl = producto.imagen?.trim().replace("https://imgur.com/", "https://i.imgur.com/") + ".png";
-
                 card.innerHTML = `
                     <div class="image-container">
-                        <img src="${imagenUrl}" alt="${producto.nombre}">
+                        <img
+                          src="${imgSrc}"
+                          alt="${dish.name}"
+                          loading="lazy"
+                          onerror="this.src='{% static 'orders/img/placeholder.png' %}'"
+                        >
                     </div>
-                    <h3>${producto.nombre}</h3>
-                    <p class="description">${producto.descripcion}</p>
-                    <p class="price">$${producto.precio}</p>
-                    <button class="add-to-cart" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${producto.precio}">+</button>
-
+                    <h3>${dish.name}</h3>
+                    <p class="description">${dish.description}</p>
+                    <p class="price">$${parseFloat(dish.price).toFixed(2)}</p>
+                    <button
+                      class="add-to-cart"
+                      data-id="${dish.id}"
+                      data-nombre="${dish.name}"
+                      data-precio="${parseFloat(dish.price)}"
+                    >+</button>
                 `;
 
-                if (categorias[producto.categoria]) {
-                    categorias[producto.categoria].appendChild(card);
+                // Insertar en la categoría correspondiente
+                if (categorias[dish.category]) {
+                    categorias[dish.category].appendChild(card);
                 }
             });
 
+            // Después de renderizar, enganchar los listeners de "Agregar"
             document.querySelectorAll(".add-to-cart").forEach(button => {
                 button.addEventListener("click", () => {
-                    const idProducto = button.dataset.id;
-                    const nombreProducto = button.dataset.nombre;
-                    const precioProducto = parseFloat(button.dataset.precio);
+                    const id     = button.dataset.id;
+                    const nombre = button.dataset.nombre;
+                    const precio = parseFloat(button.dataset.precio);
 
-                    let productoExistente = carrito.find(item => item.nombre === nombreProducto);
-
-                    if (productoExistente) {
-                        productoExistente.cantidad++;
+                    const existente = carrito.find(item => item.id === id);
+                    if (existente) {
+                        existente.cantidad++;
                     } else {
-                        carrito.unshift({ id: idProducto, nombre: nombreProducto, precio: precioProducto, cantidad: 1 });
+                        carrito.unshift({ id, nombre, precio, cantidad: 1 });
                     }
-
                     actualizarCarrito();
                 });
             });
         })
-        .catch(err => console.error("Error cargando productos:", err));
-
-        document.querySelector(".buy").addEventListener("click", (event) => {
-            if (carrito.length === 0) {
-                event.preventDefault(); // ✅ Solo prevenimos si el carrito está vacío
-                alert("Debes agregar al menos un producto antes de enviar el pedido.");
-            } else {
-                taxSection.classList.remove("hidden");
-                enviarPedido();
-            }
+        .catch(err => {
+            console.error("Error cargando menú:", err);
+            // Mostrar mensaje de error en cada sección
+            Object.values(categorias).forEach(container => {
+                container.innerHTML = "<p>Error al cargar el menú. Intenta más tarde.</p>";
+            });
         });
-        
-        
-        
 
+    // 2. Botón de procesar compra
+    document.querySelector(".buy").addEventListener("click", event => {
+        if (carrito.length === 0) {
+            event.preventDefault();
+            alert("Debes agregar al menos un producto antes de enviar el pedido.");
+        } else {
+            taxSection.classList.remove("hidden");
+            enviarPedido();
+        }
+    });
+
+    // 3. Botón de limpiar carrito
     document.querySelector(".delate").addEventListener("click", () => {
         carrito = [];
         taxSection.classList.add("hidden");
         actualizarCarrito();
     });
 
+    // Función para actualizar la UI del carrito
     function actualizarCarrito() {
         listaCarrito.innerHTML = "";
-    let precioTotal = 0;
+        let precioTotal = 0;
 
-    carrito.forEach((item, index) => {
-        let li = document.createElement("li");
-        li.innerHTML = `<span class="nombre-producto">${item.nombre} ($${item.precio.toFixed(2)})</span>
-                        <span class="cantidad">x${item.cantidad}</span>
-                        <button class="eliminar-item" data-index="${index}">🗑️</button>`;
-        listaCarrito.appendChild(li);
-        precioTotal += item.precio * item.cantidad;
-    });
-
-    let tax = (precioTotal * 0.035).toFixed(2);
-    let total = (precioTotal + parseFloat(tax)).toFixed(2);
-
-    precioElemento.textContent = `$${precioTotal.toFixed(2)}`;
-    impuestoElemento.textContent = `$${tax}`;
-    totalElemento.textContent = `$${total}`;
-
-    // 🔹 Guardar carrito en localStorage cada vez que se actualiza
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-
-    document.querySelectorAll(".eliminar-item").forEach(button => {
-        button.addEventListener("click", function () {
-            let index = this.getAttribute("data-index");
-            carrito.splice(index, 1);
-            actualizarCarrito();
+        carrito.forEach((item, index) => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <span class="nombre-producto">${item.nombre} ($${item.precio.toFixed(2)})</span>
+                <span class="cantidad">x${item.cantidad}</span>
+                <button class="eliminar-item" data-index="${index}">🗑️</button>
+            `;
+            listaCarrito.appendChild(li);
+            precioTotal += item.precio * item.cantidad;
         });
-    });
+
+        const tax   = (precioTotal * 0.035).toFixed(2);
+        const total = (precioTotal + parseFloat(tax)).toFixed(2);
+
+        precioElemento.textContent   = `$${precioTotal.toFixed(2)}`;
+        impuestoElemento.textContent = `$${tax}`;
+        totalElemento.textContent    = `$${total}`;
+
+        // Guardar en localStorage
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+
+        // Enganchar evento para eliminar cada ítem
+        document.querySelectorAll(".eliminar-item").forEach(button => {
+            button.addEventListener("click", () => {
+                const idx = parseInt(button.dataset.index, 10);
+                carrito.splice(idx, 1);
+                actualizarCarrito();
+            });
+        });
     }
 
+    // Función para preparar el pedido y pasar parámetros a la vista de pago
     function enviarPedido() {
         const params = new URLSearchParams();
-        carrito.forEach((item, index) => {
-            params.append(`producto${index}`, `${item.nombre}(${item.cantidad})`);
+        carrito.forEach((item, i) => {
+            params.append(`producto${i}`, `${item.nombre}(${item.cantidad})`);
         });
         params.append("total", totalElemento.textContent);
         window.history.pushState({}, "", `?${params.toString()}`);
     }
+
+    // Inicializar carrito al cargar la página
+    actualizarCarrito();
 });

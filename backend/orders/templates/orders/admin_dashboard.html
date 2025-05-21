@@ -1,0 +1,33 @@
+{% extends 'orders/base.html' %}
+{% block title %}Dashboard Admin | Piazzeta{% endblock %}
+{% block content %}
+<h2>Panel de Administración</h2>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th><th>Usuario</th><th>Cliente</th><th>Fecha</th><th>Estado</th><th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for pedido in pedidos %}
+    <tr>
+      <td>{{ pedido.id }}</td>
+      <td>{{ pedido.user.username }}</td>
+      <td>{{ pedido.customer_name }}</td>
+      <td>{{ pedido.created_at|date:'SHORT_DATETIME_FORMAT' }}</td>
+      <td>{{ pedido.get_status_display }}</td>
+      <td>
+        <form method="post" action="{% url 'update_order_status' pedido.id %}">
+          {% csrf_token %}
+          <select name="status">
+            <option value="P" {% if pedido.status=='P' %}selected{% endif %}>Pendiente</option>
+            <option value="C" {% if pedido.status=='C' %}selected{% endif %}>Completado</option>
+          </select>
+          <button type="submit">Actualizar</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

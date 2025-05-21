@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Piazzeta{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'orders/css/stylegeneral.css' %}">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="{% url 'home' %}">Home</a> |
+      <a href="{% url 'menu' %}">Menú</a> |
+      {% if user.is_authenticated %}
+        <a href="{% url 'mis_pedidos' %}">Mis Pedidos</a> |
+        <a href="{% url 'logout' %}">Logout</a>
+      {% else %}
+        <a href="{% url 'login' %}">Login</a> |
+        <a href="{% url 'register' %}">Registro</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>
