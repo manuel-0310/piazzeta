@@ -1,0 +1,261 @@
+:root {
+    --primary-font: "Romana Bold", serif;
+    --secondary-font: 'Poppins', sans-serif;
+    --primary-color: #fff;
+    --secondary-color: #262626;
+    --highlight-color: #ffd821;
+}
+
+h1, .descripcion h3 {
+    font-family: var(--primary-font);
+}
+
+p {
+    font-family: var(--secondary-font);
+    font-weight: 200;
+}
+
+.main {
+    margin-top: 40px;
+    padding: 50px;
+    background: url('https://source.unsplash.com/1600x900/?healthy,food') no-repeat center center/cover;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.main h1 {
+    font-size: 90px;
+    letter-spacing: -3px;
+    color: #fff;
+}
+
+.main p {
+    font-size: 20px;
+    margin-top: 15px;
+    max-width: 700px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.opinion {
+    position: relative;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.opinion h1 {
+    font-size: 60px;
+    font-weight: bold;
+    margin-bottom: 100px;
+}
+
+.fotopizza .foto img {
+    width: 70%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+@media (max-width: 1024px) {
+    .main {
+        height: 40vh;
+        padding: 40px;
+    }
+
+    .main h1 {
+        font-size: 70px;
+    }
+
+    .main p {
+        font-size: 18px;
+        max-width: 600px;
+    }
+
+    .opinion {
+        height: 70vh;
+        padding: 30px;
+    }
+
+    .opinion h1 {
+        font-size: 50px;
+        margin-bottom: 60px;
+    }
+
+    .fotopizza .foto img {
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .main {
+        height: 35vh;
+        padding: 30px;
+    }
+
+    .main h1 {
+        font-size: 50px;
+        letter-spacing: -2px;
+    }
+
+    .main p {
+        font-size: 16px;
+        max-width: 500px;
+    }
+
+    .opinion {
+        height: 60vh;
+        padding: 20px;
+    }
+
+    .opinion h1 {
+        font-size: 40px;
+        margin-bottom: 40px;
+    }
+
+    .fotopizza .foto img {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .main {
+        height: 30vh;
+        padding: 20px;
+    }
+
+    .main h1 {
+        font-size: 36px;
+    }
+
+    .main p {
+        font-size: 14px;
+        max-width: 90%;
+    }
+
+    .opinion {
+        height: auto;
+        padding: 10px;
+    }
+
+    .opinion h1 {
+        font-size: 32px;
+        margin-bottom: 30px;
+    }
+
+    .fotopizza .foto img {
+        width: 95%;
+    }
+}
+
+.opinion-contenido {
+    display: flex;
+    width: 77vw;
+    height: 50vh;
+    background-color: var(--secondary-color);
+    border-radius: 20px;
+    padding: 60px;
+    margin: 0 auto 20px auto;
+    text-align: left;
+    font-size: 1.3vw;
+    line-height: 1.2;
+    color: var(--primary-color);
+    font-family: var(--secondary-font);
+    font-weight: bold;
+    position: relative;
+}
+
+.cita {
+    width: 55%;
+    position: absolute;
+    top: 30%;
+}
+
+.nombre {
+    margin-top: 30px;
+}
+
+.ocupacion {
+    color: rgba(255, 255, 255, 0.451);
+    margin-top: 10px;
+}
+
+.opinion figure {
+    position: absolute;
+    bottom: -5px;
+    right: 0px;
+    width: 35vw;
+}
+
+.opinion figure img {
+    width: 100%;
+    filter: drop-shadow(0px -10px 15px rgba(255, 255, 255, 0.418));
+}
+
+.pizzadelacasa {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.pizzadelacasa h1 {
+    font-size: 60px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.pizzadelacasa p {
+    font-size: 20px;
+    max-width: 700px;
+    margin: 10px auto 40px auto;
+}
+
+.descripcion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    max-width: 80%;
+    margin: 0 auto;
+    gap: 40px;
+}
+
+.descripcion img {
+    width: 280px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.textodescripcion {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 500px;
+}
+
+.descripcion h2 {
+    font-size: 35px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.descripcion .combination {
+    font-size: 20px;
+    line-height: 1.5;
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+.descripcion h3 {
+    font-size: 35px;
+    font-weight: lighter;
+    color: var(--highlight-color);
+}

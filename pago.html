@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago - Piazzetta</title>
+    <link rel="stylesheet" href="stylegeneral.css">
+    <link rel="stylesheet" href="pagostyle.css">
+    <link rel="icon" type="image/png" href="src/logo.png">
+    
+</head>
+<body>
+    <header>
+        <h1>Proceso de Pago</h1>
+    </header>
+    <main>
+        <section class="formulario-pago">
+            <h2>Datos de Envío</h2>
+            <form id="pedido-form">
+                <input type="text" id="nombre" placeholder="Nombre" required>
+                <input type="text" id="telefono" placeholder="Teléfono" required>
+                <input type="text" id="direccion" placeholder="Dirección" required>
+                <button type="submit">Enviar Pedido</button>
+            </form>
+                    
+            <button type="button" onclick="cancelarPedido()">Cancelar Pedido</button>
+        </section>
+        <section class="resumen-carrito">
+            <h2>Resumen del Pedido</h2>
+            <ul id="lista-carrito"></ul>
+            <p><strong>Subtotal:</strong> <span id="precio"></span></p>
+            <p><strong>IVA (3.5%):</strong> <span id="impuesto"></span></p>
+            <p><strong>Total:</strong> <span id="total"></span></p>
+        </section>
+    </main>
+    <script src="scriptpago.js"></script>
+</body>
+</html>

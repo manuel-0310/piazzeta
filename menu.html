@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet" href="stylegeneral.css">
+    <link rel="stylesheet" href="menustyle.css">
+    <link rel="icon" type="image/png" href="src/logo.png">
+    <script src="scriptmenu.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">Piazzetta</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Main</a></li>
+                <li><a href="#">Servicios</a></li>
+                <li><a href="#">Reservaciones</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+        <a href="menu.html" class="cart-button">
+            <img src="src/carrito.png" alt="Carrito de compras">
+        </a>
+    </header>
+
+    <main>
+        <div class="menu-container">
+            <div class="menu">
+                <div class="categoria">
+                    <h2>Entradas</h2>
+                    <div id="menu-entradas" class="grid-menu"></div>
+                </div>
+                <div class="categoria">
+                    <h2>Pizzas</h2>
+                    <div id="menu-Pizzas" class="grid-menu"></div>
+                </div>
+                <div class="categoria">
+                    <h2>Bebidas</h2>
+                    <div id="menu-Bebidas" class="grid-menu"></div>
+                </div>
+                <div class="categoria">
+                    <h2>Postres</h2>
+                    <div id="menu-Postres" class="grid-menu"></div>
+                </div>
+            </div>
+
+            <section class="carritoCompra">
+                <h2>Tu carrito</h2>
+                <ul class="lista-carrito"></ul>
+                <h3>Precio:</h3>
+                <p class="precio">$0</p>
+
+                <div class="tax-section hidden">
+                    <h3>IVA</h3>
+                    <p class="impuesto">$0</p>
+                    <h3>Total</h3>
+                    <p class="total">$0</p>
+                </div>
+
+                <a href="pago.html">
+                    <button class="buy">Procesar Compra</button>
+                </a>
+                <button class="delate">Cancelar Compra</button>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Direccion</h3>
+                <p>Calle 85 # 11-25, Zona Rosa, Bogotá, Colombia.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Horarios</h3>
+                <p>L-D 11AM - 9PM</p>
+            </div>
+            <div class="footer-section">
+                <h3>Hecho por:</h3>
+                <p>Daniel Riveros, Manuel Castillo y Samuel Borda</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            Piazzetta © 2021-2025, TODOS LOS DERECHOS RESERVADOS
+        </div>
+    </footer>
+</body>
+</html>
+
