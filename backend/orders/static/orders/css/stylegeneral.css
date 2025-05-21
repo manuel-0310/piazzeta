@@ -19,7 +19,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 body {
-    background-image: url('src/fondo4.jpg');
+    background-image: url('../images/fondo4.jpg');
     color: var(--primary-color);
     text-align: center;
 }
@@ -46,8 +46,6 @@ nav ul {
     list-style: none;
     display: flex;
     gap: 25px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 200;
 }
 
 nav ul li a {

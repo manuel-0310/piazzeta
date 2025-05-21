@@ -1,13 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pago - Piazzetta</title>
-    <link rel="stylesheet" href="stylegeneral.css">
-    <link rel="stylesheet" href="pagostyle.css">
-    <link rel="icon" type="image/png" href="src/logo.png">
-    
+    <title>Inicio | Piazzeta</title>
+    <!-- Enlaces correctos a CSS -->
+    <link rel="stylesheet" href="{% static 'orders/css/stylegeneral.css' %}">
+    <link rel="stylesheet" href="{% static 'orders/css/pagostyle.css' %}">
 </head>
 <body>
     <header>
@@ -33,6 +33,6 @@
             <p><strong>Total:</strong> <span id="total"></span></p>
         </section>
     </main>
-    <script src="scriptpago.js"></script>
+    <script src="{% static 'orders/js/scriptpago.js' %}"></script>
 </body>
 </html>

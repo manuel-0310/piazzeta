@@ -1,13 +1,14 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
-    <link rel="stylesheet" href="stylegeneral.css">
-    <link rel="stylesheet" href="menustyle.css">
-    <link rel="icon" type="image/png" href="src/logo.png">
-    <script src="scriptmenu.js" defer></script>
+    <link rel="stylesheet" href="{% static 'orders/css/stylegeneral.css' %}">
+    <link rel="stylesheet" href="{% static 'orders/css/menustyle.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'orders/images/logo.png' %}">
+    <script src="{% static 'orders/js/scriptmenu.js' %}" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
 </head>
@@ -16,15 +17,15 @@
         <div class="logo">Piazzetta</div>
         <nav>
             <ul>
-                <li><a href="index.html">Main</a></li>
+                <li><a href="{% url 'home' %}">Main</a></li>
                 <li><a href="#">Servicios</a></li>
                 <li><a href="#">Reservaciones</a></li>
                 <li><a href="#">Blog</a></li>
                 <li><a href="#">Contacto</a></li>
             </ul>
         </nav>
-        <a href="menu.html" class="cart-button">
-            <img src="src/carrito.png" alt="Carrito de compras">
+        <a href="{% url 'pago' %}" class="cart-button">
+            <img src="{% static 'orders/images/carrito.png' %}" alt="Carrito de compras">
         </a>
     </header>
 
@@ -62,7 +63,7 @@
                     <p class="total">$0</p>
                 </div>
 
-                <a href="pago.html">
+                <a href="{% url 'pago' %}">
                     <button class="buy">Procesar Compra</button>
                 </a>
                 <button class="delate">Cancelar Compra</button>
@@ -91,4 +92,3 @@
     </footer>
 </body>
 </html>
-
