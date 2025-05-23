@@ -145,6 +145,20 @@ nav ul li a:hover {
     margin-right: 10px;
 }
 
+.user-menu a {
+  margin-left: 15px;
+  color: #ffd821;
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.user-menu a:hover {
+  color: #fff;
+}
+
+
 .user-menu a,
 .login-button {
     color: #ffd821;
