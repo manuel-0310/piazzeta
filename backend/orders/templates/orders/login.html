@@ -5,9 +5,25 @@
   <meta charset="UTF-8">
   <title>Login</title>
   <link rel="stylesheet" href="{% static 'orders/css/style-login.css' %}">
+  <link rel="stylesheet" href="{% static 'orders/css/stylegeneral.css' %}">
 
 </head>
 <body>
+  <header>
+        <div class="logo">Piazzetta</div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'menu' %}">Menú</a></li>
+                <li><a href="#">Servicios</a></li>
+                <li><a href="#">Reservaciones</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+        <a href="{% url 'menu' %}" class="cart-button">
+            <img src="{% static 'orders/images/carrito.png' %}" alt="Carrito de compras">
+        </a>
+    </header>
   <h2>Iniciar Sesión</h2>
   <form method="post" id="login-form">
     {% csrf_token %}

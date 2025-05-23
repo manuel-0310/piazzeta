@@ -7,8 +7,24 @@
   <title>Proceso de Pago | Piazzeta</title>
   <link rel="stylesheet" href="{% static 'orders/css/stylegeneral.css' %}">
   <link rel="stylesheet" href="{% static 'orders/css/pagostyle.css' %}">
+
 </head>
 <body>
+  <header>
+        <div class="logo">Piazzetta</div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'menu' %}">Menú</a></li>
+                <li><a href="#">Servicios</a></li>
+                <li><a href="#">Reservaciones</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+        <a href="{% url 'menu' %}" class="cart-button">
+            <img src="{% static 'orders/images/carrito.png' %}" alt="Carrito de compras">
+        </a>
+    </header>
   <header>
     <h1>Proceso de Pago</h1>
   </header>
