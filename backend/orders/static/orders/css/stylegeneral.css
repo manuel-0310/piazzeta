@@ -131,6 +131,34 @@ nav ul li a:hover {
     transform: scale(1.1);
 }
 
+.user-auth {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 20px;
+}
+
+.user-menu span {
+    margin-right: 10px;
+}
+
+.user-menu a,
+.login-button {
+    color: #ffd821;
+    text-decoration: none;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.user-menu a:hover,
+.login-button:hover {
+    color: #fff;
+}
+
 footer {
     padding: 40px 20px;
     text-align: center;
