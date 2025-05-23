@@ -2,7 +2,7 @@
 {% block title %}Mis Pedidos | Piazzeta{% endblock %}
 {% block content %}
 <h2>Mis Pedidos</h2>
-<ul>
+<ul class="pedidos-lista">
   {% for pedido in pedidos %}
     <li>
       <strong>Pedido #{{ pedido.id }}</strong> ({{ pedido.created_at|date:'SHORT_DATETIME_FORMAT' }})<br>

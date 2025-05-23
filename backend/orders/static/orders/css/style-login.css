@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@700&family=Poppins:wght@100&display=swap');
+
+:root {
+  --color-fondo: #1e1e1e;
+  --color-texto: #ffffff;
+  --color-acento: #ffd821;
+  --color-secundario: #2c2c2c;
+  --fuente-principal: 'Fira Sans Condensed', sans-serif;
+  --fuente-secundaria: 'Poppins', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--fuente-secundaria);
+  color: var(--color-texto);
+}
+
+body {
+  background-color: var(--color-fondo);
+  padding: 40px;
+}
+
+header, nav {
+  background-color: var(--color-secundario);
+  padding: 15px 25px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+nav a {
+  color: var(--color-texto);
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: var(--color-acento);
+}
+
+h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 20px;
+  font-family: var(--fuente-principal);
+}
+
+form {
+  background-color: var(--color-secundario);
+  padding: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+label, input, textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+input, textarea, select {
+  background-color: #333;
+  border: 1px solid #666;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+}
+
+button {
+  background-color: var(--color-acento);
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: gold;
+}
+
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  background-color: var(--color-secundario);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #444;
+}
+
+th {
+  background-color: #333;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: #2a2a2a;
+}
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+ul.pedidos-lista {
+  max-width: 800px;
+  margin: auto;
+  text-align: left;
+  list-style: none;
+  padding: 0;
+}
+
+ul.pedidos-lista > li {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+ul.pedidos-lista > li strong {
+  font-size: 18px;
+}
+
+ul.pedidos-lista ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
