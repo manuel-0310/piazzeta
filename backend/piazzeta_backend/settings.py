@@ -28,8 +28,7 @@ SECRET_KEY = 'django-insecure-kix4!v0f#j9ykyvo(zn_eq&rmwgo!yrumb&9e#fnes)kdpm@2#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'piazzeta.onrender.com').split(',')
-
+ALLOWED_HOSTS = [*]
 
 # Application definition
 
