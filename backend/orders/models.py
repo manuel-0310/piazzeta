@@ -15,9 +15,9 @@ class Order(models.Model):
     from django.conf import settings
 
     STATUS_CHOICES = [
-         ('P', 'Pendiente'),
-         ('C', 'Completado'),
-     ]
+        ('P', 'Pendiente'),
+        ('E', 'Entregado'),
+    ]
 
     customer_name = models.CharField(max_length=100)
     phone = models.CharField(max_length=20)

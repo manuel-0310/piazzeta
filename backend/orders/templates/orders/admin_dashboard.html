@@ -15,15 +15,20 @@
       <td>{{ pedido.user.username }}</td>
       <td>{{ pedido.customer_name }}</td>
       <td>{{ pedido.created_at|date:'SHORT_DATETIME_FORMAT' }}</td>
-      <td>{{ pedido.get_status_display }}</td>
       <td>
         <form method="post" action="{% url 'update_order_status' pedido.id %}">
           {% csrf_token %}
           <select name="status">
-            <option value="P" {% if pedido.status=='P' %}selected{% endif %}>Pendiente</option>
-            <option value="C" {% if pedido.status=='C' %}selected{% endif %}>Completado</option>
+            <option value="P" {% if pedido.status == 'P' %}selected{% endif %}>Pendiente</option>
+            <option value="E" {% if pedido.status == 'E' %}selected{% endif %}>Entregado</option>
           </select>
-          <button type="submit">Actualizar</button>
+          <button type="submit">OK</button>
+        </form>
+      </td>
+      <td>
+        <form method="post" action="{% url 'delete_order' pedido.id %}" style="display:inline">
+          {% csrf_token %}
+          <button type="submit" onclick="return confirm('¿Eliminar pedido #{{ pedido.id }}?')">Eliminar</button>
         </form>
       </td>
     </tr>

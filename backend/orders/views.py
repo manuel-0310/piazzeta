@@ -10,6 +10,30 @@ from .models import Dish, Order
 from .serializers import DishSerializer, OrderSerializer
 from .forms import RegisterForm
 
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth.views import LogoutView
+
+class CustomLogoutView(LogoutView):
+    next_page = 'home'
+
+    def dispatch(self, request, *args, **kwargs):
+        """
+        Cualquier petición (GET o POST) ejecuta logout
+        y redirige a next_page.
+        """
+        # llamamos a post() para procesar el logout
+        response = super().post(request, *args, **kwargs)
+        return response
+
+@login_required
+def delete_order(request, pk):
+    pedido = get_object_or_404(Order, pk=pk)
+    pedido.delete()
+    return redirect('admin_dashboard')
+
+
 # Landing, menú y pago
 
 def index(request):
@@ -45,9 +69,6 @@ class CustomLoginView(LoginView):
         # Usuarios normales van a mis-pedidos
         return reverse('mis_pedidos')
 
-class CustomLogoutView(LogoutView):
-    next_page = 'home'
-
 # Vista usuario: consultar sus pedidos
 @login_required
 def mis_pedidos(request):
@@ -55,10 +76,44 @@ def mis_pedidos(request):
     return render(request, 'orders/mis_pedidos.html', {'pedidos': pedidos})
 
 # Vista admin: dashboard de pedidos (ahora accesible a cualquier usuario autenticado)
+from django.db.models import Q
+
 @login_required
 def admin_dashboard(request):
-    pedidos = Order.objects.all().order_by('-created_at')
-    return render(request, 'orders/admin_dashboard.html', {'pedidos': pedidos})
+    # parámetros de filtro (ya tenías)
+    status_filter = request.GET.get('status', '')
+    client_filter = request.GET.get('client', '').strip()
+
+    # parámetros de orden
+    sort_field = request.GET.get('sort', '')         # e.g. 'customer_name' o 'status'
+    direction  = request.GET.get('dir', 'asc')       # 'asc' o 'desc'
+
+    # Base queryset
+    pedidos = Order.objects.all()
+
+    # Aplica filtros
+    if status_filter in dict(Order.STATUS_CHOICES):
+        pedidos = pedidos.filter(status=status_filter)
+    if client_filter:
+        pedidos = pedidos.filter(customer_name__icontains=client_filter)
+
+    # Aplica orden, validando campos permitidos
+    allowed_sorts = {'customer_name', 'status'}
+    if sort_field in allowed_sorts:
+        prefix = '' if direction == 'asc' else '-'
+        pedidos = pedidos.order_by(f"{prefix}{sort_field}", '-created_at')
+    else:
+        # Orden por defecto
+        pedidos = pedidos.order_by('-created_at')
+
+    context = {
+        'pedidos': pedidos,
+        'status_filter': status_filter,
+        'client_filter': client_filter,
+        'sort_field':   sort_field,
+        'direction':    direction,
+    }
+    return render(request, 'orders/admin_dashboard.html', context)
 
 # Actualizar estado de pedido (admin)
 @login_required
